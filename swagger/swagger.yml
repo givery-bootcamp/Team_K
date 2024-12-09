@@ -7,6 +7,45 @@ servers:
   - url: http://localhost:9000
     description: local server
 paths:
+  /login:
+    post:
+      summary: ログインする
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - password
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                password:
+                  type: string
+                  example: "password"
+      responses:
+        "200":
+          description: ログイン成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "Michael"
+                  icon:
+                    type: string
+                    example: "https://example.com/icon.png"
+                    description: "icon の URL"
+        "401":
+          description: ログイン失敗
   /posts:
     get:
       summary: 全ての投稿をリストで返す
@@ -26,22 +65,22 @@ paths:
         required: true
         content:
           application/json:
-              schema:
-                type: object
-                required:
+            schema:
+              type: object
+              required:
                 - user_id
                 - content
-                properties:
-                  user_id:
-                    type: integer
-                  content:
-                    type: string
+              properties:
+                user_id:
+                  type: integer
+                content:
+                  type: string
       responses:
         "201":
           description: 投稿のJSON
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/Post"
   /replies:
     get:
@@ -54,7 +93,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: 返信のJSON配列
           content:
             application/json:
@@ -69,25 +108,25 @@ paths:
         required: true
         content:
           application/json:
-              schema: 
-                type: object
-                required:
+            schema:
+              type: object
+              required:
                 - post_id
                 - user_id
                 - content
-                properties:
-                  post_id: 
-                    type: integer
-                  user_id:
-                    type: integer
-                  content:
-                    type: string
+              properties:
+                post_id:
+                  type: integer
+                user_id:
+                  type: integer
+                content:
+                  type: string
       responses:
-        '201':
+        "201":
           description: 返信のJSON
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/Reply"
 
   /stamp/add/post:
@@ -97,26 +136,26 @@ paths:
         required: true
         content:
           application/json:
-              schema: 
-                type: object
-                required:
+            schema:
+              type: object
+              required:
                 - post_id
                 - user_id
                 - stamp_name
-                properties:
-                  post_id: 
-                    type: integer
-                  user_id:
-                    type: integer
-                  stamp_name:
-                    type: string
+              properties:
+                post_id:
+                  type: integer
+                user_id:
+                  type: integer
+                stamp_name:
+                  type: string
 
       responses:
-        '200':
+        "200":
           description: 更新後の投稿のJSON
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/Post"
 
   /stamp/remove/post:
@@ -126,26 +165,26 @@ paths:
         required: true
         content:
           application/json:
-              schema: 
-                type: object
-                required:
+            schema:
+              type: object
+              required:
                 - post_id
                 - user_id
                 - stamp_name
-                properties:
-                  post_id: 
-                    type: integer
-                  user_id:
-                    type: integer
-                  stamp_name:
-                    type: string
+              properties:
+                post_id:
+                  type: integer
+                user_id:
+                  type: integer
+                stamp_name:
+                  type: string
 
       responses:
-        '200':
+        "200":
           description: 更新後の投稿のJSON
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/Post"
 
   /stamp/add/reply:
@@ -155,25 +194,25 @@ paths:
         required: true
         content:
           application/json:
-              schema: 
-                type: object
-                required:
+            schema:
+              type: object
+              required:
                 - reply_id
                 - user_id
                 - stamp_name
-                properties:
-                  reply_id: 
-                    type: integer
-                  user_id:
-                    type: integer
-                  stamp_name:
-                    type: string
+              properties:
+                reply_id:
+                  type: integer
+                user_id:
+                  type: integer
+                stamp_name:
+                  type: string
       responses:
-        '200':
+        "200":
           description: 更新後の返信のJSON
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/Reply"
 
   /stamp/remove/reply:
@@ -183,27 +222,26 @@ paths:
         required: true
         content:
           application/json:
-              schema: 
-                type: object
-                required:
+            schema:
+              type: object
+              required:
                 - reply_id
                 - user_id
                 - stamp_name
-                properties:
-                  reply_id: 
-                    type: integer
-                  user_id:
-                    type: integer
-                  stamp_name:
-                    type: string
+              properties:
+                reply_id:
+                  type: integer
+                user_id:
+                  type: integer
+                stamp_name:
+                  type: string
       responses:
-        '200':
+        "200":
           description: 更新後の返信のJSON
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/Reply"
-
 
 components:
   schemas:
@@ -248,7 +286,7 @@ components:
               count:
                 type: integer
                 example: 1
-            
+
     UserPublic:
       type: object
       properties:

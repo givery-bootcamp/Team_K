@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"errors"
-	"log"
 	"myapp/internal/controllers/request"
 	"myapp/internal/controllers/response"
 	"myapp/internal/repositories"
